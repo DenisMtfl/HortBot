@@ -56,6 +56,8 @@ namespace HortBot.Service
                 StreamWriter tw = File.CreateText(cookiePath);
                 tw.Write(cookie);
                 tw.Close();
+
+                SidHepCookie = cookie;
             }
         }
 

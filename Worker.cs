@@ -124,8 +124,8 @@ namespace HortBot
 
                         var today = presences.Data.Rows.Find(x => x.DateStart.Date.OnlyDate() == DateTime.Now.Date.OnlyDate());
 
-                        var StartDate = today.DateStart?.Date;
-                        var EndDate = today.DateEnd?.Date;
+                        var StartDate = today?.DateStart?.Date;
+                        var EndDate = today?.DateEnd?.Date;
 
                         foreach (var chatid in ChatIds)
                         {
