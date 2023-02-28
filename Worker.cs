@@ -127,6 +127,9 @@ namespace HortBot
                         var StartDate = today?.DateStart?.Date;
                         var EndDate = today?.DateEnd?.Date;
 
+
+
+
                         foreach (var chatid in ChatIds)
                         {
                             var p = presencesPerUsers.Find(x => x.ChatId == chatid);
@@ -138,6 +141,12 @@ namespace HortBot
 
                             p.DateStart = StartDate;
                             p.DateEnd = EndDate;
+
+                            if (StartDate == null)
+                                p.StartMsgSent = false;
+
+                            if (EndDate == null)
+                                p.EndMsgSent = false;
 
                             if (p.DateStart != null && p.DateEnd == null && (p.StartMsgSent != true))
                             {
