@@ -18,7 +18,7 @@ namespace HortBot.Service
         {
             _config = config;
 
-            cookiePath = Path.Combine(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location), "cookie.txt");
+            cookiePath = "cookie.txt";/*Path.Combine(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location), "cookie.txt");*/
             SaveLoginCookie();
         }
 

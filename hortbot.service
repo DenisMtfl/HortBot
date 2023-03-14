@@ -1,0 +1,10 @@
+[Unit]
+Description=HortBot
+
+[Service]
+Type=notify
+WorkingDirectory=/home/username/HortBot
+ExecStart=/home/username/HortBot/HortBot
+
+[Install]
+WantedBy=multi-user.target

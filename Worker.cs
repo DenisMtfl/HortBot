@@ -31,7 +31,7 @@ namespace HortBot
         {
             _telegramBotConfig = configuration.Value;
 
-            chatIdFilePath = Path.Combine(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location), "ChatIds.json");
+            chatIdFilePath = "ChatIds.json"; /*Path.Combine(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location), "ChatIds.json");*/
 
             if (System.IO.File.Exists(chatIdFilePath))
                 ChatIds = JsonConvert.DeserializeObject<List<long>>(System.IO.File.ReadAllText(chatIdFilePath));
@@ -108,10 +108,9 @@ namespace HortBot
             {
                 foreach (var chatid in ChatIds)
                 {
-                    //var chat = await botClient.GetChatAsync(chatid);
-                    Message sentMessage = await botClient.SendTextMessageAsync(
-                    chatId: chatid,
-                    text: "Der Hort-Bot wurde neugestartet");
+                    //Message sentMessage = await botClient.SendTextMessageAsync(
+                    //chatId: chatid,
+                    //text: "Der Hort-Bot wurde neugestartet");
                 }
 
                 while (!stoppingToken.IsCancellationRequested)
@@ -126,9 +125,6 @@ namespace HortBot
 
                         var StartDate = today?.DateStart?.Date;
                         var EndDate = today?.DateEnd?.Date;
-
-
-
 
                         foreach (var chatid in ChatIds)
                         {
