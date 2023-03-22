@@ -29,7 +29,25 @@ namespace HortBot
 
         public Worker(ILogger<Worker> logger, IOptions<Config> configuration)
         {
-            _telegramBotConfig = configuration.Value;
+            Console.WriteLine("TelegramBotToken from Config: " + configuration.Value.TelegramBotToken);
+
+            Console.WriteLine("TELEGRAMBOTTOKEN: " + Environment.GetEnvironmentVariable("TELEGRAMBOTTOKEN"));
+            Console.WriteLine("EMAIL: " + Environment.GetEnvironmentVariable("EMAIL"));
+            Console.WriteLine("PASSWORD: " + Environment.GetEnvironmentVariable("PASSWORD"));
+
+            if (string.IsNullOrEmpty(configuration.Value.TelegramBotToken))
+            {
+                _telegramBotConfig = new Config();
+                _telegramBotConfig.TelegramBotToken = Environment.GetEnvironmentVariable("TELEGRAMBOTTOKEN");
+                _telegramBotConfig.HortProLogin = new HortProLogin();
+                _telegramBotConfig.HortProLogin.Email = Environment.GetEnvironmentVariable("EMAIL");
+                _telegramBotConfig.HortProLogin.Email = Environment.GetEnvironmentVariable("PASSWORD");
+
+
+            }
+            else
+                _telegramBotConfig = configuration.Value;
+
 
             chatIdFilePath = "ChatIds.json"; /*Path.Combine(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location), "ChatIds.json");*/
 

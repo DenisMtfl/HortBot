@@ -2,6 +2,8 @@ using HortBot;
 
 IHost host = Host.CreateDefaultBuilder(args)
     .UseSystemd()
+    .ConfigureAppConfiguration((hostingContext, configuration) =>
+        configuration.AddEnvironmentVariables())
     .ConfigureServices((hostContext, services) =>
     {
         IConfiguration configuration = hostContext.Configuration;
