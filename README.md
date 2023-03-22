@@ -30,7 +30,7 @@ dotnet publish -c Release -r linux-x64 --self-contained=true -p:PublishSingleFil
 
 # Docker Image
 
-https://hub.docker.com/repository/docker/deniscubic/hortbot/general
+https://hub.docker.com/r/deniscubic/hortbot
 
 # Installation
 
