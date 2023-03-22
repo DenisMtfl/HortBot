@@ -24,6 +24,10 @@ In der Datei `appsettings.json` muss der TelegramBot-Token und die Login Informa
 Entwickelt wurde das Programm in *C#* **.NET 7.0** mit **Microsoft Visual Studio 2022**
 Mittels **Microsoft Visual Studio 2022** kann es kompiliert und ausgeführt werden.
 
+# Publishing für Linux
+
+dotnet publish -c Release -r linux-x64 --self-contained=true -p:PublishSingleFile=true -p:GenerateRuntimeConfigurationFiles=true -o artifacts
+
 # Installation
 
 Eine Installation steht aktuell noch nicht bereit.
