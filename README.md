@@ -28,6 +28,10 @@ Mittels **Microsoft Visual Studio 2022** kann es kompiliert und ausgeführt werd
 
 dotnet publish -c Release -r linux-x64 --self-contained=true -p:PublishSingleFile=true -p:GenerateRuntimeConfigurationFiles=true -o artifacts
 
+# Docker Image
+
+https://hub.docker.com/r/deniscubic/hortbot
+
 # Installation
 
 Eine Installation steht aktuell noch nicht bereit.
