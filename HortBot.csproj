@@ -11,6 +11,16 @@
 		<Copyright>2023</Copyright>
 	</PropertyGroup>
 	<ItemGroup>
+	  <Compile Remove="#IDs\**" />
+	  <Compile Remove="artifacts\**" />
+	  <Content Remove="#IDs\**" />
+	  <Content Remove="artifacts\**" />
+	  <EmbeddedResource Remove="#IDs\**" />
+	  <EmbeddedResource Remove="artifacts\**" />
+	  <None Remove="#IDs\**" />
+	  <None Remove="artifacts\**" />
+	</ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />

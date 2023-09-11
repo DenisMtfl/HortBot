@@ -8,7 +8,7 @@ namespace HortBot.Model.Presences
         public int Count { get; set; }
 
         [JsonPropertyName("rows")]
-        public List<Row> Rows { get; set; }
+        public List<Row> Rows { get; set; } = new List<Row>();
     }
 
     public class DateEnd
@@ -50,10 +50,12 @@ namespace HortBot.Model.Presences
         public string Id { get; set; }
 
         [JsonPropertyName("date_start")]
-        public DateStart? DateStart { get; set; }
+        //public DateStart? DateStart { get; set; }
+        public DateTime? DateStart { get; set; }
 
         [JsonPropertyName("date_end")]
-        public DateEnd? DateEnd { get; set; }
+        //public DateEnd? DateEnd { get; set; }
+        public DateTime? DateEnd { get; set; }
 
         [JsonPropertyName("duration")]
         public int? Duration { get; set; }

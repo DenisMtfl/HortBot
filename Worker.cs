@@ -31,12 +31,10 @@ namespace HortBot
         {
             Console.WriteLine("TelegramBotToken from Config: " + configuration.Value.TelegramBotToken);
 
-            Console.WriteLine("TELEGRAMBOTTOKEN: " + Environment.GetEnvironmentVariable("TELEGRAMBOTTOKEN"));
-            Console.WriteLine("EMAIL: " + Environment.GetEnvironmentVariable("EMAIL"));
-            Console.WriteLine("PASSWORD: " + Environment.GetEnvironmentVariable("PASSWORD"));
-
             if (string.IsNullOrEmpty(configuration.Value.TelegramBotToken))
             {
+                Console.WriteLine("Environment Variables not emtpy");
+
                 _telegramBotConfig = new Config();
                 _telegramBotConfig.TelegramBotToken = Environment.GetEnvironmentVariable("TELEGRAMBOTTOKEN");
                 _telegramBotConfig.HortProLogin = new HortProLogin();
@@ -46,13 +44,24 @@ namespace HortBot
 
             }
             else
-                _telegramBotConfig = configuration.Value;
+            {
+                Console.WriteLine("Environment Variables are emtpy");
 
+                _telegramBotConfig = configuration.Value;
+            }
+
+            Console.WriteLine("TELEGRAMBOTTOKEN: " + _telegramBotConfig.TelegramBotToken);
+            Console.WriteLine("EMAIL: " + _telegramBotConfig.HortProLogin.Email);
+            Console.WriteLine("PASSWORD: " + _telegramBotConfig.HortProLogin.Password);
 
             chatIdFilePath = "ChatIds.json"; /*Path.Combine(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location), "ChatIds.json");*/
 
             if (System.IO.File.Exists(chatIdFilePath))
                 ChatIds = JsonConvert.DeserializeObject<List<long>>(System.IO.File.ReadAllText(chatIdFilePath));
+            else
+                ChatIds = JsonConvert.DeserializeObject<List<long>>(System.IO.File.ReadAllText(Path.Combine(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location), "ChatIds.json")));
+
+
 
             botClient = new TelegramBotClient(_telegramBotConfig.TelegramBotToken);
 
@@ -89,7 +98,7 @@ namespace HortBot
 
             var chatId = message.Chat.Id;
 
-            if (message.Entities.Length == 1 && message.EntityValues.First() == "/start")
+            if (message.Entities?.Length == 1 && message.EntityValues.First() == "/start")
             {
                 Message sentMessage = await botClient.SendTextMessageAsync(
                 chatId: chatId,
@@ -139,10 +148,10 @@ namespace HortBot
 
                         var presences = await api.GetObjectAsync<Presences>($"https://elternportal.hortpro.de/api/kids/{kid.Data[0].Id}/presences?start=0&limit=5");
 
-                        var today = presences.Data.Rows.Find(x => x.DateStart.Date.OnlyDate() == DateTime.Now.Date.OnlyDate());
+                        var today = presences.Data.Rows.Find(x => x.DateStart.Value.OnlyDate() == DateTime.Now.Date.OnlyDate());
 
-                        var StartDate = today?.DateStart?.Date;
-                        var EndDate = today?.DateEnd?.Date;
+                        var StartDate = today?.DateStart;
+                        var EndDate = today?.DateEnd;
 
                         foreach (var chatid in ChatIds)
                         {
